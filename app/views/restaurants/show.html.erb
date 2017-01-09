@@ -63,6 +63,32 @@
           </div>
         </li>
       <% end %>
+
+      <li class="list-group-item">
+        <form action="/create_review" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for restaurant_id -->
+      <input type="hidden" name="restaurant_id" value="<%= @restaurant.id %>">
+
+      <!-- Label and input for user_id -->
+      <input type="hidden" name="user_id" value="<%= current_user.id %>">
+
+      <!-- Label and input for stars -->
+      <div class="form-group">
+        <label for="stars" class="control-label">
+          Stars
+        </label>
+
+        <input type="text" id="stars" name="stars" placeholder="Stars" class="form-control" value="">
+      </div>
+
+      <button class="btn btn-block btn-success">
+        Create Review
+      </button>
+    </form>
+      </li>
     </ul>
   </div>
 </div>
@@ -94,6 +120,29 @@
           </div>
         </li>
       <% end %>
+
+      <li class="list-group-item">
+        <form action="/create_photo" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for restaurant_id -->
+      <input type="hidden" name="restaurant_id" value="<%= @restaurant.id %>">
+
+      <!-- Label and input for review_id -->
+      <div class="form-group">
+        <label for="review_id" class="control-label">
+          Review
+        </label>
+
+        <%= select_tag(:review_id, options_from_collection_for_select(Review.all, :id, :restaurant_id), :class => "form-control") %>
+      </div>
+
+      <button class="btn btn-block btn-success">
+        Create Photo
+      </button>
+    </form>
+      </li>
     </ul>
   </div>
 </div>
